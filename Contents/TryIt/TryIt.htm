@@ -1,0 +1,149 @@
+﻿<!--
+//*****************************************************************************************
+// Contents Framework : Servie - Robot Avatar Part.
+//                      Date : 2016.02.02
+//
+//    (1)
+//          User Change : [Step 1]
+//					      [Step 2]
+//*****************************************************************************************
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html" charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=10" />
+
+<style>
+
+body {margin:0;padding:0;}
+#visible
+{
+overflow: hidden;
+}
+#output tr td{width: 200px;text-align: left;}
+.ui-keyboard{top: 420px !important;
+    left: 78px !important;
+    background-color: #9d9d9d;
+    border-radius: 5px;}
+#myForm div{margin-bottom:20px;}
+.contents #btn{text-align:center;position:absolute;left:500px;padding:10px 20px;border:none;border-radius:5px; background-color:#034671;color:white;font-size:30px;}
+
+.contents #btnSubmit{margin-top:20px;padding:10px 20px;border:none;border-radius:5px; background-color:#034671;color:white;font-size:30px;}
+
+</style>
+
+<!-- 기본으로 포함되어야 하는 js -->
+<script language="JavaScript" type="text/javascript" src="../../Scripts/FlashPlayer.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../Scripts/BaseCommand.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../Scripts/BaseEvent.js"></script>
+<script language="JavaScript" type="text/javascript" src="../../Scripts/LogConsole.js"></script>
+
+<!-- 추가적으로 포함되는 js -->
+<script language="JavaScript" type="text/javascript" src="Quiz.js"></script>
+<script language="JavaScript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>	
+<!-- keyboard widget css & script (required) -->
+	<link href="css/keyboard.css" rel="stylesheet">
+	<script src="js/jquery-latest.min.js"></script>
+	<script src="js/jquery.keyboard.js"></script>
+	<script>
+		$(function(){
+			$('#keyboard').keyboard();
+			$('#keyboard1').keyboard();
+			$('#keyboard2').keyboard();
+		});
+	</script>
+
+<script language="JavaScript" type="text/javascript">
+		var i=0;
+	setInterval(function(){	
+			    i++;
+				if(i>4){
+					
+					i=1;
+				}
+				//document.pic.src="../../images/slider/" + i + ".png";
+			
+		
+	}
+	,3000);
+
+$(document).ready(function(){
+	$('a.btn-ok, #dialog-overlay, #dialog-box').click(function () {		
+		$('#dialog-overlay, #dialog-box').hide();		
+		return false;
+	});
+
+	$("#btnSubmit").click(function(){
+	
+		var aname = $(".name").val();
+
+		var acname = $(".cname").val();
+		var aemail = $(".email").val();
+		if(aname=='' || acname=='' || aemail==''){
+			ShowPopup('Please Fill All fields.');
+			
+			/*PlaySpeech('Please Enter Your Name');*/
+		}
+		else{
+			var dataString =  { 'name' : aname, 'cname' : acname, 'email': aemail };
+			$.ajax({	
+				url:"http://www.tamoorkayani.com/amgen.php",
+				type:"post",
+				data : dataString,
+          		cache : false,
+				success : function (data) {	
+					ShowPopup('Thank You');
+					
+					//PlaySpeech('Thank You');
+					GoHome();			
+				}
+			});
+		}
+	});
+		
+});
+
+
+
+</script>
+<link href="../../css/Setting.css" rel="stylesheet" type="text/css" />
+<link href="../../css/Language.css" rel="stylesheet" type="text/css" />
+<link href="../../css/Main.css" rel="stylesheet" type="text/css" />
+<link href="quiz.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body onload="JSMain()" id="visible" bgcolor="black" onbeforeunload="JSUnload()" style="padding: 0; margin: 0;  width: 1080px; height: 1920px;">
+<div class="header" style="">
+		<div class="settingsection" align="left"><a href="#" onclick="GoHome()"><img src="../../images/Home-icon.png"
+			width="80" style="position: absolute; left: 20px; top: 20px" ></a>
+		</div>
+		<div class="logo" style="width: 40%;float: left;text-align: center;"><img src="../../images/logo.png" style="padding-top: 34px;" onclick="Setting()"></div>
+		
+	</div>
+
+<div class="main" >
+		
+	<div class="contents" style="padding: 2px 0;">
+		
+		
+		<h1 style="color: white">Coming Soon</h1>
+		<!--<iframe src="http://www.danburyfairmall.com/Sales" width="1080" height="1100" frameborder="0"></iframe>-->
+	</div>
+</div>
+	<div class="footer" style="width: 1080px;">
+		<div id="slider">
+			 
+			   <img src="../../images/slider/1.png" name="pic" width="1080" >
+		</div>
+		
+
+	</div>
+
+			
+
+</body>
+
+
+</html>
